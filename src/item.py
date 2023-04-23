@@ -1,4 +1,5 @@
 from csv import DictReader
+import os
 
 
 class Item:
@@ -42,7 +43,8 @@ class Item:
         """
         Класс-метод, инициализирующий экземпляры класса `Item` данными из файла _src/items.csv_
         """
-        with open(r"C:\Users\Анна\PycharmProjects\electronics-shop-project\src\items.csv", encoding="UTF-8") as file:
+        path = os.path.join("../src/", "items.csv")
+        with open(path, encoding="UTF-8") as file:
             reader = DictReader(file)
             for row in reader:
                 item = (cls(row["name"], row["price"], row["quantity"]))

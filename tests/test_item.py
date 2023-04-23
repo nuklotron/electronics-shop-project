@@ -20,6 +20,7 @@ def test_name(some_item):
     assert some_item.name == "Alcatel"
     with pytest.raises(Exception, match="Длина наименования товара превышает 10 символов."):
         some_item.name = "SuperAlcatel"
+        assert some_item.name == Exception
 
 
 def test_string_to_number():
