@@ -75,3 +75,9 @@ class Item:
             self.__name = name
         else:
             raise Exception("Длина наименования товара превышает 10 символов.")
+
+    def __add__(self, other):
+        if isinstance(other, Item):
+            return self.quantity + other.quantity
+        else:
+            raise Exception
