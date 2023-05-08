@@ -3,8 +3,10 @@ from src.item import Item
 
 class Phone(Item):
     """
-    `Phone` содержит все атрибуты класса `Item` и дополнительно атрибут, содержащий количество поддерживаемых сим-карт
+    `Phone` содержит все атрибуты класса `Item` и дополнительно атрибут,
+    содержащий количество поддерживаемых сим-карт
     """
+
     def __init__(self, name, price, quantity, number_of_sim: int):
         super().__init__(name, price, quantity)
         self.__number_of_sim = number_of_sim
@@ -14,7 +16,10 @@ class Phone(Item):
 
     @property
     def number_of_sim(self):
-        return self.__number_of_sim
+        if self.__number_of_sim > 0:
+            return self.__number_of_sim
+        else:
+            raise ValueError("Количество физических SIM-карт должно быть целым числом больше нуля.")
 
     @number_of_sim.setter
     def number_of_sim(self, number_of_sim):
@@ -22,3 +27,10 @@ class Phone(Item):
             self.__number_of_sim = number_of_sim
         else:
             raise ValueError("Количество физических SIM-карт должно быть целым числом больше нуля.")
+
+    def __add__(self, other):
+        if not isinstance(other, Item):
+            raise ValueError("нельзя складывать Phone с другими типами кроме себя и Item")
+
+        else:
+            return self.quantity + other.quantity

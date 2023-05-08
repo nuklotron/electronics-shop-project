@@ -47,7 +47,8 @@ class Item:
     @classmethod
     def instantiate_from_csv(cls):
         """
-        Класс-метод, инициализирующий экземпляры класса `Item` данными из файла _src/items.csv_
+        Класс-метод, инициализирующий экземпляры класса `Item`
+        данными из файла _src/items.csv_
         """
         path = os.path.join("../src/", "items.csv")
         with open(path, encoding="UTF-8") as file:
@@ -77,7 +78,8 @@ class Item:
             raise Exception("Длина наименования товара превышает 10 символов.")
 
     def __add__(self, other):
-        if isinstance(other, Item):
-            return self.quantity + other.quantity
+        if not isinstance(other, Item):
+            raise ValueError("Нельзя складывать Phone с другими типами кроме себя и Item")
+
         else:
-            raise Exception
+            return self.quantity + other.quantity
