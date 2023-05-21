@@ -52,11 +52,18 @@ class Item:
         данными из файла _src/items.csv_
         """
         path = os.path.join("../src/", "items.csv")
-        with open(path, encoding="UTF-8") as file:
-            reader = DictReader(file)
-            for row in reader:
-                item = (cls(row["name"], row["price"], row["quantity"]))
-            return item
+        try:
+            with open(path, encoding="UTF-8") as file:
+                reader = DictReader(file)
+                for row in reader:
+                    item = (cls(row["name"], row["price"], row["quantity"]))
+                return item
+
+        except KeyError:
+            raise InstantiateCSVError("Файл поврежден")
+
+        except FileNotFoundError:
+            raise FileNotFoundError("Отсутствует файл item.csv")
 
     @staticmethod
     def string_to_number(num):
@@ -84,3 +91,7 @@ class Item:
 
         else:
             return self.quantity + other.quantity
+
+
+class InstantiateCSVError(Exception):
+    pass
