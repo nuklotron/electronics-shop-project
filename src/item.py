@@ -50,6 +50,7 @@ class Item:
         """
         Класс-метод, инициализирующий экземпляры класса `Item`
         данными из файла _src/items.csv_
+        Если файл поврежден или отсутствует, вызывается ошибка
         """
         path = os.path.join("../src/", "items.csv")
         try:
@@ -94,4 +95,7 @@ class Item:
 
 
 class InstantiateCSVError(Exception):
+    """
+    Класс-исключение, если в файл поврежден
+    """
     pass
